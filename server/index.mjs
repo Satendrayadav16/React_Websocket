@@ -1,10 +1,10 @@
-import { express } from "express";
-import { http } from "http";
+import express from "express";
+import http from "http";
 import * as socketio from "socket.io";
 
 const port = 5000;
 
-const app = exprees();
+const app = express();
 
 const server = new socketio.Server({
   cors: {
@@ -15,7 +15,7 @@ const server = new socketio.Server({
 let timeChange;
 
 server.on("connection", (socket) => {
-  console.log("web socket connected");
+  console.log("web socket connected", socket.id);
   if (timeChange) {
     clearInterval(timeChange);
   }
