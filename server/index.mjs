@@ -6,7 +6,9 @@ const port = 5000;
 
 const app = express();
 
-const server = new socketio.Server({
+const httpServer = http.createServer(app);
+
+const server = new socketio.Server(httpServer, {
   cors: {
     origin: "*",
   },
@@ -22,6 +24,8 @@ server.on("connection", (socket) => {
   setInterval(() => socket.emit("message", new Date()), 1000);
 });
 
-const httpServer = http.createServer(app);
+// const httpServer = http.createServer(app);
 
-httpServer.listen(port);
+httpServer.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});

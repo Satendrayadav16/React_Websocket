@@ -5,7 +5,7 @@ import './App.css'
 
 import { io } from "socket.io-client";
 
-const socket = io("localhost:5000/")
+const socket = io("http://localhost:5000")
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,6 +13,9 @@ function App() {
   useEffect(() => {
     socket.on("connect", () => {
       console.log("socket connected")
+    })
+    socket.on("connect_error", () => {
+      console.log("socket connection error", socket)
     })
   }, [])
 
