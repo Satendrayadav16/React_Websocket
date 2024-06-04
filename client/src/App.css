@@ -37,6 +37,14 @@
   padding: 2em;
 }
 
+.add {
+  background: green;
+}
+
+.sub {
+  background: red;
+}
+
 .read-the-docs {
   color: #888;
 }

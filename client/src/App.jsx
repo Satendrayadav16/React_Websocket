@@ -8,7 +8,20 @@ import { io } from "socket.io-client";
 const socket = io("http://localhost:5000")
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [countSub, setCountSub] = useState(0)
+  console.log(count, countSub)
+
+  useEffect(() => {
+    setCountSub(count);
+  }, [count]);
+
+  useEffect(() => {
+    if (countSub >= 0) {
+      setCount(countSub);
+    }
+
+  }, [countSub])
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -31,8 +44,11 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button className='add' onClick={() => setCount((count) => count + 1)}>
           count is {count}
+        </button>
+        <button className='sub' onClick={() => setCountSub((countSub) => countSub - 1)}>
+          Sub count is {countSub}
         </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
