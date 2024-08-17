@@ -2,7 +2,17 @@ import express from "express";
 import http from "http";
 import * as socketio from "socket.io";
 
+const port = 5000;
 
+const app = express();
+
+const httpServer = http.createServer(app);
+
+const server = new socketio.Server(httpServer, {
+  cors: {
+    origin: "*",
+  },
+});
 
 let timeChange;
 
